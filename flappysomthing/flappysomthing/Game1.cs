@@ -9,7 +9,10 @@ namespace flappysomthing {
     public class Game1 : Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+        public enum state {
+            menu, playing, splashscreen,
+        }
+        public state CurrentScreen;
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -23,7 +26,7 @@ namespace flappysomthing {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-
+           
             base.Initialize();
         }
 
@@ -34,6 +37,8 @@ namespace flappysomthing {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            //laddar in sprites
+            Content.Load<Texture2D>("play"); 
 
             // TODO: use this.Content to load your game content here
         }

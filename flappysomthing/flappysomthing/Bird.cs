@@ -10,6 +10,11 @@ namespace flappysomthing {
     class Bird {
         Vector2 position, velocity;
         bool isAlive;
+        Texture2D sprite;
 
+        public void Update() {
+            position += velocity;
+
+        }
     }
 }
