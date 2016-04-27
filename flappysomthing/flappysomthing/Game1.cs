@@ -1,6 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace flappysomthing {
     /// <summary>
@@ -12,6 +16,11 @@ namespace flappysomthing {
         public enum state {
             menu, playing, splashscreen,
         }
+        Texture2D Nurcan,Snickers,Play;
+
+        List<Pipes> obstacle = new List<Pipes>();
+        
+        
         public state CurrentScreen;
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -26,7 +35,8 @@ namespace flappysomthing {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-           
+            obstacle.Add(new Pipes());
+            obstacle[0].Initialize();
             base.Initialize();
         }
 
@@ -38,8 +48,10 @@ namespace flappysomthing {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //laddar in sprites
-            Content.Load<Texture2D>("play"); 
-
+           Play = Content.Load<Texture2D>("play");
+           Snickers = Content.Load<Texture2D>("Snickers_wrapped");
+           Nurcan = Content.Load<Texture2D>("NurcanPipe2");
+            obstacle[0].sprite = Content.Load<Texture2D>("NurcanPipe2");
             // TODO: use this.Content to load your game content here
         }
 
@@ -59,7 +71,7 @@ namespace flappysomthing {
         protected override void Update(GameTime gameTime) {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            obstacle[0].Update();
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -70,9 +82,11 @@ namespace flappysomthing {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+            GraphicsDevice.Clear(Color.White);
+            float rotation = 60f;
+            spriteBatch.Begin();
+            spriteBatch.Draw(obstacle[0].sprite, obstacle[0].position, null, null, Color.);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

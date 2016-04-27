@@ -26,7 +26,7 @@ namespace flappysomthing {
 
         public void Initialize() {
             
-            Bird play = new Bird(Content.Load<Texture2D>("play.png"))
+       
             
         }
 
