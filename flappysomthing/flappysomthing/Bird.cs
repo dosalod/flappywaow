@@ -11,10 +11,10 @@ namespace flappysomthing {
         Vector2 position, velocity;
         bool isAlive;
         Texture2D sprite;
+        Rectangle hitbox;
 
         public void Update() {
             position += velocity;
-
         }
     }
 }

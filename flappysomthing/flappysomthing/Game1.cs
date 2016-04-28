@@ -13,20 +13,15 @@ namespace flappysomthing {
     public class Game1 : Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        public enum state {
-            menu, playing, splashscreen,
-        }
+        public enum state { menu, playing, splashscreen,}  
         Texture2D Nurcan,Snickers,Play;
-
         List<Pipes> obstacle = new List<Pipes>();
-        
-        
         public state CurrentScreen;
+
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -35,8 +30,19 @@ namespace flappysomthing {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-            obstacle.Add(new Pipes());
-            obstacle[0].Initialize();
+
+            if (CurrentScreen == state.menu) {
+            // TODO: Lägga till start menyn
+            }
+            if (CurrentScreen == state.playing) {
+            // TODO: Fixa rör spawns och player
+                obstacle.Add(new Pipes());
+                obstacle[0].Initialize();
+            }
+            if (CurrentScreen == state.splashscreen) {
+            // TODO: fixa poäng system osv
+            }
+            
             base.Initialize();
         }
 
@@ -48,9 +54,9 @@ namespace flappysomthing {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //laddar in sprites
-           Play = Content.Load<Texture2D>("play");
-           Snickers = Content.Load<Texture2D>("Snickers_wrapped");
-           Nurcan = Content.Load<Texture2D>("NurcanPipe2");
+            Play = Content.Load<Texture2D>("play");
+            Snickers = Content.Load<Texture2D>("Snickers_wrapped");
+            Nurcan = Content.Load<Texture2D>("NurcanPipe2");
             obstacle[0].sprite = Content.Load<Texture2D>("NurcanPipe2");
             // TODO: use this.Content to load your game content here
         }
@@ -61,6 +67,15 @@ namespace flappysomthing {
         /// </summary>
         protected override void UnloadContent() {
             // TODO: Unload any non ContentManager content here
+            if (CurrentScreen != state.menu) {
+            // TODO: ev lägga till så allt som har med menyn att göra laddas ut
+            }
+            if (CurrentScreen != state.playing) {
+            // TODO: ev lägga till så allt som har med spelet att göra laddas ut
+            }
+            if (CurrentScreen != state.splashscreen) {
+            // TODO: ev lägga till så allt som har med splashscreenen att göra laddas ut
+            }
         }
 
         /// <summary>
@@ -71,8 +86,18 @@ namespace flappysomthing {
         protected override void Update(GameTime gameTime) {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            obstacle[0].Update();
             // TODO: Add your update logic here
+
+            if(CurrentScreen == state.menu) {
+            // TODO: Behövs det här ens?
+            }
+            if(CurrentScreen == state.playing) { 
+            // TODO: Fixa så alla rör position updateras
+            obstacle[0].Update();
+            }
+            if(CurrentScreen == state.splashscreen) {
+            // TODO: Behövs det här ens?
+            }
 
             base.Update(gameTime);
         }
@@ -83,9 +108,18 @@ namespace flappysomthing {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.White);
-            float rotation = 60f;
+            
             spriteBatch.Begin();
-            spriteBatch.Draw(obstacle[0].sprite, obstacle[0].position, null, null, Color.);
+            if(CurrentScreen == state.menu) {
+            // TODO: Fixa så allt med menyn ritas ut
+            }
+            if(CurrentScreen == state.playing) { 
+            // TODO: Fixa så alla rör ritas ut
+            spriteBatch.Draw(obstacle[0].sprite, obstacle[0].position, null, null, null, 90f);
+            }
+            if(CurrentScreen == state.splashscreen) {
+            // TODO: Fixa så allt med splashscreenen ritas ut, score, play again osv
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
