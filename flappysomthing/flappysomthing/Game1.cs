@@ -15,6 +15,7 @@ namespace flappysomthing {
         SpriteBatch spriteBatch;
         public enum state { menu, playing, splashscreen,}  
         Texture2D Nurcan,Snickers,Play;
+        Bird player = new Bird();
         List<Pipes> obstacle = new List<Pipes>();
         public state CurrentScreen;
 
@@ -30,14 +31,24 @@ namespace flappysomthing {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-
+            CurrentScreen = state.playing;
             if (CurrentScreen == state.menu) {
             // TODO: Lägga till start menyn
             }
             if (CurrentScreen == state.playing) {
             // TODO: Fixa rör spawns och player
                 obstacle.Add(new Pipes());
+                obstacle.Add(new Pipes());
+
                 obstacle[0].Initialize();
+                obstacle[0].position.X += 112;
+
+                //Detta är vad marcus har åstakommit
+                obstacle[0].position.Y -= 120;
+                obstacle[1].Initialize();
+                obstacle[1].position.Y += 80;
+                //Här slutar det marcus har åstakommit. #Teamproject
+      
             }
             if (CurrentScreen == state.splashscreen) {
             // TODO: fixa poäng system osv
@@ -56,8 +67,9 @@ namespace flappysomthing {
             //laddar in sprites
             Play = Content.Load<Texture2D>("play");
             Snickers = Content.Load<Texture2D>("Snickers_wrapped");
-            Nurcan = Content.Load<Texture2D>("NurcanPipe2");
-            obstacle[0].sprite = Content.Load<Texture2D>("NurcanPipe2");
+            
+            obstacle[0].sprite = Content.Load<Texture2D>("NurcanPipe3");
+            obstacle[1].sprite = Content.Load<Texture2D>("NurcanPipe3");
             // TODO: use this.Content to load your game content here
         }
 
@@ -91,9 +103,10 @@ namespace flappysomthing {
             if(CurrentScreen == state.menu) {
             // TODO: Behövs det här ens?
             }
-            if(CurrentScreen == state.playing) { 
-            // TODO: Fixa så alla rör position updateras
-            obstacle[0].Update();
+            if (CurrentScreen == state.playing) {
+                // TODO: Fixa så alla rör position updateras
+                obstacle[0].Update();
+                obstacle[1].Update();
             }
             if(CurrentScreen == state.splashscreen) {
             // TODO: Behövs det här ens?
@@ -113,9 +126,10 @@ namespace flappysomthing {
             if(CurrentScreen == state.menu) {
             // TODO: Fixa så allt med menyn ritas ut
             }
-            if(CurrentScreen == state.playing) { 
-            // TODO: Fixa så alla rör ritas ut
-            spriteBatch.Draw(obstacle[0].sprite, obstacle[0].position, null, null, null, 90f);
+            if(CurrentScreen == state.playing) {
+                // TODO: Fixa så alla rör ritas ut
+            spriteBatch.Draw(obstacle[0].sprite, obstacle[0].position, null, null, null, 9.429f);
+            spriteBatch.Draw(obstacle[1].sprite, obstacle[1].position, null,null ,null, 0);
             }
             if(CurrentScreen == state.splashscreen) {
             // TODO: Fixa så allt med splashscreenen ritas ut, score, play again osv

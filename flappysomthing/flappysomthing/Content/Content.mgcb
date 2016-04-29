@@ -35,7 +35,7 @@
 /processorParam:TextureFormat=Color
 /build:Snickers_wrapped.png
 
-#begin NurcanPipe2.png
+#begin NurcanPipe3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -44,5 +44,5 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:NurcanPipe2.png
+/build:NurcanPipe3.png
 
